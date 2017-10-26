@@ -1,23 +1,50 @@
-
 from turtle import *
 
 pen2=Pen()
+'''
+rt(45)
+fd(90)
+rt(135)
 
+down()
+while x<120:
+
+for i in range(0,6):
+    fd(200)
+    rt(61)
+rt(11.1111)
+x=x+1
+'''
 
 setworldcoordinates(-1000,-1000,1000,1000)
 screensize(10,10,'skyblue')
 def star(x,y):
+
+    
+
+    
     speed(0)
     points=36
     penup()
-    goto(x,-900)
+    goto(x,y)
     pendown()
-    color('lightgreen')
-    goto(x,0)
+    #leafs
+    color('green','green')
+    width(1)
+    begin_fill()
     for i in range(0,2):
         left(135)
         forward(100)
-    
+        left(45)
+        forward(100)
+    for i in range(0,2):
+        forward(100)
+        left(45)
+        forward(100)
+        left(135)
+    end_fill()
+    left(90)
+    #flower
     color('brown', 'yellow')
     begin_fill()
     for i in range(0,points):
@@ -25,6 +52,17 @@ def star(x,y):
         left(170)
         
     end_fill()
+    right(90)
+    #stem
+    color('lightgreen')
+    
+    width(10)
+    goto(x,-900)
+    forward(11.5)
+    end_fill()
+    
+    
+    
     ht()
     
 
@@ -63,10 +101,29 @@ def sunflower(x,y):
         left(90)
         ht()
 def rose(x,y):
+    penup()
+    goto(x,y)
+    color('brown','yellow')
+    width(1)
     speed(0)
-    backward(222)
+    pendown()
+    begin_fill()
+    rt(45)
+    
+    rt(135)
 
+    
+    p=0
+    while p<21:
 
+        for i in range(0,6):
+            fd(100)
+            rt(61)
+        rt(11.1111)
+        p+=1
+    
+    end_fill()
+    left(180)
 
 
 
@@ -83,7 +140,6 @@ onscreenclick(sunflower,btn=2)
 onscreenclick(rose,btn=3)
 '''
 from turtle import *
-
 def switchupdown(x=0, y=0):
     if pen()["pendown"]:
         end_fill()
@@ -91,12 +147,10 @@ def switchupdown(x=0, y=0):
     else:
         down()
         begin_fill()
-
 def changecolor(x=0, y=0):
     global colors
     colors = colors[1:]+colors[:1]
     color(colors[0])
-
 def main():
     global colors
     shape("turtle")
@@ -110,19 +164,16 @@ def main():
     onscreenclick(changecolor,2)
     onscreenclick(switchupdown,3)
     return "EVENTLOOP"
-
 if __name__ == "__main__":
     msg = main()
     print(msg)
     mainloop()
-
 import math
 #radius=int(input("What is the radius of the flower? "))
 #petals=int(input("How many petals do you want? "))
 radius=50
 petals=15
 speed=0
-
 def draw_arc(b,r):  
     c=2*math.pi*r 
     ca=c/(360/60)  
@@ -131,26 +182,15 @@ def draw_arc(b,r):
     for i in range(n):
         b.fd(l)
         b.lt(360/(n*6))
-
 def draw_petal(b,r):
     draw_arc(b,r)
     b.lt(180-60)
     draw_arc(b,r)
-
 import turtle
 bob=turtle.Turtle()
-
 #draw_petal(bob,radius)
-
 for i in range(petals):
     draw_petal(bob,radius)
     bob.lt(360/petals)
-
 turtle.mainloop()
 '''
-
-dr_p2()
-dr_p3()
-
-penup()
-onscreenclick(star)
