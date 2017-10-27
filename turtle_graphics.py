@@ -1,7 +1,8 @@
 from turtle import *
 
+
 pen2=Pen()
-bee=Turtle()
+pen3=Turtle()
 
 setworldcoordinates(-1000,-1000,1000,1000)
 screensize(10,10,'skyblue')
@@ -137,22 +138,44 @@ def sunflower(x,y):
 
 
 
-def b_fly():
-    
-    bee.circle(10)
 
 
 
-b_fly()
+
+
 dr_p2()
 def pick_s(x,y):
+        
+    
+        
     plant(x,y)
     sunflower(x,y)
+        
+    
+    
+    
 
 def pick_r(x,y):
     plant(x,y)
     rose(x,y)
 
+
+
 onscreenclick(pick_s,btn=3)
 onscreenclick(pick_r,btn=1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
