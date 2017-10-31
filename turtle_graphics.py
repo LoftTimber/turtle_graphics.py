@@ -64,7 +64,7 @@ def plant(x,y):
 x=xcor()
 y=ycor()
 
-def dr_p2():
+def draw_ground():
     pen2.color('darkgreen','darkgreen')
     pen2.speed(0)
     pen2.penup()
@@ -141,7 +141,7 @@ def sunflower(x,y):
 
 
 
-dr_p2()
+draw_ground()
 
 
 
@@ -152,28 +152,22 @@ def pick_s(x,y):
         
 
 
-def pick_r(x,y):
-    global toggle
-    
-    if toggle:
-        r_1='black'
-        r_2='white'
-        
-    else:
-        r_1='black'
-        r_2='red'
-        
-    plant(x,y)
-    rose(x,y,r_1,r_2)
-    
-    toggle=not toggle
-
-
-toggle=True
-
+def pick_r(x,y):        
+    plant(x, y)
+    rose(x, y, rose_color, other_rose_color)
     
 
-onkey(pick_r,"space")
+
+rose_color = 'red'
+other_rose_color = 'white'
+
+def toggle_color():
+    global rose_color, other_rose_color
+    rose_color, other_rose_color = other_rose_color, rose_color
+    print(rose_color, other_rose_color)
+
+listen()
+onkey(toggle_color, "space")
 
 onscreenclick(pick_s,btn=3)
 onscreenclick(pick_r,btn=1)
