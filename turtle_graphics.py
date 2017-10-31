@@ -4,7 +4,6 @@ import time
 pen2=Pen()
 
 '''
-
 def dr_p2():
     pen2.color('darkgreen','darkgreen')
     pen2.speed(0)
@@ -21,11 +20,7 @@ def dr_p2():
     
     pen2.end_fill()
     pen2.ht()
-
         
-
-
-
 '''
 
 setworldcoordinates(-1000,-1000,1000,1000)
@@ -158,28 +153,30 @@ def pick_s(x,y):
 
 
 def pick_r(x,y):
+    global toggle
+    
     if toggle:
         r_1='black'
         r_2='white'
-    elif not toggle:
+        
+    else:
         r_1='black'
         r_2='red'
+        
     plant(x,y)
     rose(x,y,r_1,r_2)
+    
+    toggle=not toggle
+
 
 toggle=True
-def tgge():
-    if toggle:
-        toggle= not toggle
-    elif not toggle:
-        toggle= toggle
 
+    
 
-onkey(tgge,"space")
+onkey(pick_r,"space")
 
 onscreenclick(pick_s,btn=3)
 onscreenclick(pick_r,btn=1)
-
 
 
 
