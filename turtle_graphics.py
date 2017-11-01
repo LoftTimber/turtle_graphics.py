@@ -1,40 +1,23 @@
 from turtle import *
 import time
 
-pen2=Pen()
-
-'''
-def dr_p2():
-    pen2.color('darkgreen','darkgreen')
-    pen2.speed(0)
-    pen2.penup()
-    pen2.goto(-10000,-900)
-    pen2.pendown()
-    pen2.begin_fill()
-    for i in range(0,2):
-        pen2.forward(20000)
-        pen2.right(90)
-        pen2.forward(1000)
-        pen2.right(90)
-    
-    
-    pen2.end_fill()
-    pen2.ht()
-        
-'''
+#Turtles
+ground_pen=Pen()
+sun_pen=Pen()
 
 setworldcoordinates(-1000,-1000,1000,1000)
 screensize(10,10,'skyblue')
-def plant(x,y):
+
+
+def draw_plant(x,y):
        
     speed(0)
-    penup()
-    goto(x,y)
-    
-    #leafs
+    penup()      
     color('green','green')
     width(1)
     goto(x,y)
+
+    #draws leafs
     begin_fill()
     left(135)
     for i in range(0,2):
@@ -48,7 +31,7 @@ def plant(x,y):
     left(225)
     penup()
 
-    #stem
+    #draws stem
     color('lightgreen')
     width(10)
     pendown()
@@ -57,43 +40,40 @@ def plant(x,y):
     end_fill()
     penup()
     
-    #hideturtle
     ht()
     
 
-x=xcor()
-y=ycor()
 
 def draw_ground():
-    pen2.color('darkgreen','darkgreen')
-    pen2.speed(0)
-    pen2.penup()
-    pen2.goto(-10000,-900)
-    pen2.pendown()
-    pen2.begin_fill()
-    s=0
-    while s<2:  
-        pen2.forward(20000)
-        pen2.right(90)
-        pen2.forward(1000)
-        pen2.right(90)
-        s+=1
-    pen2.end_fill()
-    pen2.ht()
+    ground_pen.color('darkgreen','darkgreen')
+    ground_pen.speed(0)
+    ground_pen.penup()
+    ground_pen.goto(-10000,-900)
+    ground_pen.pendown()
+    
+    #draws ground
+    ground_pen.begin_fill()      
+    for i in range(0,2):  
+        ground_pen.forward(20000)
+        ground_pen.right(90)
+        ground_pen.forward(1000)
+        ground_pen.right(90)   
+    ground_pen.end_fill()
+
+    ground_pen.ht()
 
         
 
-
-
-def rose(x,y,r_1,r_2):
+def draw_rose_petals(x,y,r_1,r_2):
     speed(0)
     penup()
-    left(0)
     goto(x,y)
     width(1)
     color(r_1,r_2)
     pendown()
     left(52.5)
+    
+    #draws roses petals
     begin_fill()
     for i in range(0,3):
         right(15)
@@ -103,77 +83,102 @@ def rose(x,y,r_1,r_2):
             forward(150)
             right(135)       
     end_fill()
+    
     right(97.5)
     ht()
 
 
     
-def sunflower(x,y):
+def draw_sunflower_petals(x,y):
     penup()
     goto(x,y)
     forward(150)
-    color('brown','yellow')
+    color(sunflower_color,other_sunflower_color)
     width(1)
     speed(0)
     pendown()
     begin_fill()
-    rt(45)
+    rt(180)
     
-    rt(135)
-
-    
-    p=0
-    while p<36:
-
+    #draws sunflower petals
+    for i in range(0,36):
         for i in range(0,6):
             fd(80)
             rt(60)
-        rt(10)
-        p+=1
-    
+        rt(10)            
     end_fill()
+    
     left(90)
 
 
 
-
-
-
-
-
-draw_ground()
-
-
-
-def pick_s(x,y):
-    
-    plant(x,y)
-    sunflower(x,y)
+def draw_sunflower(x,y):   
+    draw_plant(x,y)
+    draw_sunflower_petals(x,y)
         
 
 
-def pick_r(x,y):        
-    plant(x, y)
-    rose(x, y, rose_color, other_rose_color)
+def draw_rose(x,y):        
+    draw_plant(x, y)
+    draw_rose_petals(x, y, rose_color, other_rose_color)
+
     
-
-
-rose_color = 'red'
-other_rose_color = 'white'
 
 def toggle_color():
     global rose_color, other_rose_color
+    global sunflower_color, other_sunflower_color
     rose_color, other_rose_color = other_rose_color, rose_color
-    print(rose_color, other_rose_color)
+    sunflower_color, other_sunflower_color = other_sunflower_color, sunflower_color
 
+
+
+    
+    
+    
+    
+
+def draw_sun():
+    sun_pen.color('yellow','darkorange')
+    sun_pen.penup()
+    sun_pen.goto(-1500,1000)
+    sun_pen.pendown()
+
+    #draw sun
+    sun_pen.begin_fill()
+    points=10
+    for i in range(0,points):
+        sun_pen.forward(1000)            
+        sun_pen.rt(1080/points)
+    sun_pen.end_fill()
+    
+    sun_pen.ht()
+
+
+
+rose_color = 'white'
+other_rose_color = 'red'
+sunflower_color='brown'
+other_sunflower_color='yellow'
+x=xcor()
+y=ycor()
+
+#draws ground
+draw_ground()
+
+#draws sun and moon
+draw_sun()
+
+#listens for keypressing
 listen()
+
+#changes colors
 onkey(toggle_color, "space")
 
-onscreenclick(pick_s,btn=3)
-onscreenclick(pick_r,btn=1)
 
 
-
+#draws flowers
+onscreenclick(draw_sunflower,btn=3)
+onscreenclick(draw_rose,btn=1)
 
 
 
