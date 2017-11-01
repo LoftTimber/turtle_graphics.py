@@ -1,12 +1,16 @@
 from turtle import *
 import time
 
+colormode(255)
+bgcolor(0,191,255)
+
 #Turtles
 ground_pen=Pen()
 sun_pen=Pen()
+II_sun_pen=Pen()
 
 setworldcoordinates(-1000,-1000,1000,1000)
-screensize(10,10,'skyblue')
+
 
 
 def draw_plant(x,y):
@@ -52,12 +56,14 @@ def draw_ground():
     ground_pen.pendown()
     
     #draws ground
-    ground_pen.begin_fill()      
-    for i in range(0,2):  
+    ground_pen.begin_fill()
+    ground_sides=0
+    while ground_sides<4:
         ground_pen.forward(20000)
         ground_pen.right(90)
         ground_pen.forward(1000)
-        ground_pen.right(90)   
+        ground_pen.right(90)
+        ground_sides+=2
     ground_pen.end_fill()
 
     ground_pen.ht()
@@ -138,20 +144,31 @@ def toggle_color():
     
 
 def draw_sun():
-    sun_pen.color('yellow','darkorange')
+    sun_pen.color('darkorange','darkorange')
+    II_sun_pen.color('darkorange','darkorange')
     sun_pen.penup()
+    II_sun_pen.penup()
     sun_pen.goto(-1500,1000)
+    II_sun_pen.goto(-1500,1000)
     sun_pen.pendown()
+    II_sun_pen.pendown()
 
     #draw sun
     sun_pen.begin_fill()
+    II_sun_pen.begin_fill()
     points=10
-    for i in range(0,points):
+    sun_rays_drawn=0
+    II_sun_pen.right(720/points)
+    while sun_rays_drawn<points:
         sun_pen.forward(1000)            
-        sun_pen.rt(1080/points)
+        sun_pen.right(1080/points)
+        II_sun_pen.forward(1000)
+        II_sun_pen.left(1080/points)
+        sun_rays_drawn+=2
     sun_pen.end_fill()
-    
+    II_sun_pen.end_fill()
     sun_pen.ht()
+    II_sun_pen.ht()
 
 
 
@@ -165,7 +182,7 @@ y=ycor()
 #draws ground
 draw_ground()
 
-#draws sun and moon
+#draws sun 
 draw_sun()
 
 #listens for keypressing
@@ -179,8 +196,6 @@ onkey(toggle_color, "space")
 #draws flowers
 onscreenclick(draw_sunflower,btn=3)
 onscreenclick(draw_rose,btn=1)
-
-
 
 
 
